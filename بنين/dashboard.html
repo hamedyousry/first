@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - منصة التعليم الإلكتروني</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 font-arabic">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl font-bold text-blue-900">لوحة التحكم</h1>
+                        <p class="text-xs text-gray-600">كلية التربية - العلوم البيولوجية والجيولوجية</p>
+                    </div>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4 space-x-reverse">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">الرئيسية</a>
+                        <a href="#" class="text-blue-900 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">لوحة التحكم</a>
+                        <a href="upload.html" class="text-gray-700 hover:text-blue-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">رفع ملف</a>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    <button id="logoutBtn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                        تسجيل خروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="pt-16 min-h-screen">
+        <div class="flex">
+            <!-- Sidebar -->
+            <div class="w-64 bg-white shadow-lg h-screen fixed right-0 top-16">
+                <div class="p-6">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-green-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">
+                            <span id="userInitial">A</span>
+                        </div>
+                        <div class="mr-3">
+                            <h3 class="font-semibold text-gray-900" id="userName">مدير النظام</h3>
+                            <p class="text-sm text-gray-600" id="userType">مدير</p>
+                        </div>
+                    </div>
+                    
+                    <nav class="space-y-2">
+                        <a href="#" class="sidebar-link active flex items-center px-4 py-3 text-blue-700 bg-blue-50 rounded-lg">
+                            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0h6"></path>
+                            </svg>
+                            لوحة التحكم
+                        </a>
+                        
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                            إدارة المستخدمين
+                        </a>
+                        
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            إدارة الملفات
+                        </a>
+                        
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            التقارير
+                        </a>
+                        
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                            <svg class="w-5 h-5 ml-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            الإعدادات
+                        </a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 mr-64">
+                <div class="p-8">
+                    <!-- Page Header -->
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-900 mb-2">لوحة التحكم</h1>
+                        <p class="text-gray-600">مرحباً بك في لوحة تحكم منصة التعليم الإلكتروني</p>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="stat-card bg-gradient-to-br from-blue-500 to-blue-600">
+                            <div class="stat-number" id="totalFiles">156</div>
+                            <div class="text-blue-100">إجمالي الملفات</div>
+                        </div>
+                        
+                        <div class="stat-card bg-gradient-to-br from-green-500 to-green-600">
+                            <div class="stat-number" id="totalUsers">423</div>
+                            <div class="text-green-100">إجمالي المستخدمين</div>
+                        </div>
+                        
+                        <div class="stat-card bg-gradient-to-br from-purple-500 to-purple-600">
+                            <div class="stat-number" id="totalDownloads">3,847</div>
+                            <div class="text-purple-100">إجمالي التحميلات</div>
+                        </div>
+                        
+                        <div class="stat-card bg-gradient-to-br from-orange-500 to-orange-600">
+                            <div class="stat-number" id="activeUsers">127</div>
+                            <div class="text-orange-100">المستخدمين النشطين</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <!-- Files Chart -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">توزيع الملفات حسب الفرقة</h3>
+                            <div id="filesChart" style="width: 100%; height: 300px;"></div>
+                        </div>
+                        
+                        <!-- Users Chart -->
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">توزيع المستخدمين حسب النوع</h3>
+                            <div id="usersChart" style="width: 100%; height: 300px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 mb-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-xl font-semibold text-gray-900">آخر النشاطات</h3>
+                            <button class="text-blue-600 hover:text-blue-700 font-medium">عرض الكل</button>
+                        </div>
+                        
+                        <div class="space-y-4" id="recentActivity">
+                            <!-- Activity items will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6">
+                        <h3 class="text-xl font-semibold text-gray-900 mb-6">إجراءات سريعة</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <button onclick="window.location.href='upload.html'" class="quick-action-btn">
+                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-3">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">رفع ملف جديد</span>
+                            </button>
+                            
+                            <button onclick="showComingSoon()" class="quick-action-btn">
+                                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-3">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">إضافة مستخدم</span>
+                            </button>
+                            
+                            <button onclick="showComingSoon()" class="quick-action-btn">
+                                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">تقرير نشاط</span>
+                            </button>
+                            
+                            <button onclick="showComingSoon()" class="quick-action-btn">
+                                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-3">
+                                    <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">الإعدادات</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div id="comingSoonModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-2xl max-w-md w-full p-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">قريباً</h3>
+                    <p class="text-gray-600 mb-4">هذه الميزة قيد التطوير وسيتم إضافتها قريباً</p>
+                    <button onclick="closeComingSoonModal()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        فهمت
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+            initializeCharts();
+            loadRecentActivity();
+            setupEventListeners();
+        });
+
+        function loadUserData() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+            
+            if (currentUser.email) {
+                document.getElementById('userName').textContent = currentUser.email.split('@')[0];
+                document.getElementById('userType').textContent = getUserTypeName(currentUser.userType);
+                document.getElementById('userInitial').textContent = currentUser.email.charAt(0).toUpperCase();
+            }
+        }
+
+        function getUserTypeName(type) {
+            const types = {
+                student: 'طالب',
+                teacher: 'مدرس',
+                admin: 'مدير'
+            };
+            return types[type] || 'طالب';
+        }
+
+        function initializeCharts() {
+            // Files Chart
+            const filesChart = echarts.init(document.getElementById('filesChart'));
+            const filesOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{a} <br/>{b}: {c} ({d}%)'
+                },
+                series: [
+                    {
+                        name: 'الملفات',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '18',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: [
+                            { value: 45, name: 'الفرقة الأولى', itemStyle: { color: '#3b82f6' } },
+                            { value: 38, name: 'الفرقة الثانية', itemStyle: { color: '#10b981' } },
+                            { value: 42, name: 'الفرقة الثالثة', itemStyle: { color: '#f59e0b' } },
+                            { value: 31, name: 'الفرقة الرابعة', itemStyle: { color: '#ef4444' } }
+                        ]
+                    }
+                ]
+            };
+            filesChart.setOption(filesOption);
+
+            // Users Chart
+            const usersChart = echarts.init(document.getElementById('usersChart'));
+            const usersOption = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        data: ['طلاب', 'مدرسين', 'مدراء'],
+                        axisTick: {
+                            alignWithLabel: true
+                        }
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                series: [
+                    {
+                        name: 'المستخدمين',
+                        type: 'bar',
+                        barWidth: '60%',
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                { offset: 0, color: '#10b981' },
+                                { offset: 1, color: '#059669' }
+                            ])
+                        },
+                        data: [380, 35, 8]
+                    }
+                ]
+            };
+            usersChart.setOption(usersOption);
+
+            // Make charts responsive
+            window.addEventListener('resize', function() {
+                filesChart.resize();
+                usersChart.resize();
+            });
+        }
+
+        function loadRecentActivity() {
+            const activities = [
+                {
+                    user: 'أحمد محمد',
+                    action: 'رفع ملف جديد',
+                    file: 'تلخيص الكيمياء العضوية',
+                    time: 'منذ 5 دقائق',
+                    type: 'upload'
+                },
+                {
+                    user: 'سارة أحمد',
+                    action: 'حمل ملف',
+                    file: 'امتحانات أحياء دقيقة',
+                    time: 'منذ 12 دقيقة',
+                    type: 'download'
+                },
+                {
+                    user: 'محمود حسن',
+                    action: 'علق على ملف',
+                    file: 'شرح الجيولوجيا البيئية',
+                    time: 'منذ 25 دقيقة',
+                    type: 'comment'
+                },
+                {
+                    user: 'فاطمة علي',
+                    action: 'سجل دخول',
+                    file: '',
+                    time: 'منذ 45 دقيقة',
+                    type: 'login'
+                },
+                {
+                    user: 'يوسف خالد',
+                    action: 'رفع ملف جديد',
+                    file: 'فيزياء نووية - تلخيص',
+                    time: 'منذ ساعة',
+                    type: 'upload'
+                }
+            ];
+
+            const activityContainer = document.getElementById('recentActivity');
+            activityContainer.innerHTML = '';
+
+            activities.forEach((activity, index) => {
+                const activityItem = document.createElement('div');
+                activityItem.className = 'flex items-center p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors';
+                activityItem.style.animationDelay = `${index * 0.1}s`;
+                activityItem.classList.add('animate-fade-in-up');
+
+                const iconColor = {
+                    upload: 'text-blue-600 bg-blue-100',
+                    download: 'text-green-600 bg-green-100',
+                    comment: 'text-yellow-600 bg-yellow-100',
+                    login: 'text-purple-600 bg-purple-100'
+                };
+
+                const icon = {
+                    upload: 'M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12',
+                    download: 'M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+                    comment: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+                    login: 'M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
+                };
+
+                activityItem.innerHTML = `
+                    <div class="w-10 h-10 ${iconColor[activity.type]} rounded-full flex items-center justify-center ml-3">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${icon[activity.type]}"></path>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="font-semibold text-gray-900">${activity.user}</span>
+                                <span class="text-gray-600">${activity.action}</span>
+                                ${activity.file ? `<span class="text-blue-600 font-medium">${activity.file}</span>` : ''}
+                            </div>
+                            <span class="text-sm text-gray-500">${activity.time}</span>
+                        </div>
+                    </div>
+                `;
+
+                activityContainer.appendChild(activityItem);
+            });
+        }
+
+        function setupEventListeners() {
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'login.html';
+            });
+
+            // Sidebar navigation
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    document.querySelectorAll('.sidebar-link').forEach(l => {
+                        l.classList.remove('active', 'text-blue-700', 'bg-blue-50');
+                        l.classList.add('text-gray-700');
+                    });
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active', 'text-blue-700', 'bg-blue-50');
+                    this.classList.remove('text-gray-700');
+                    
+                    // Show coming soon for non-dashboard links
+                    if (!this.getAttribute('href') || this.getAttribute('href') === '#') {
+                        showComingSoon();
+                    }
+                });
+            });
+        }
+
+        function showComingSoon() {
+            document.getElementById('comingSoonModal').classList.remove('hidden');
+        }
+
+        function closeComingSoonModal() {
+            document.getElementById('comingSoonModal').classList.add('hidden');
+        }
+
+        // Close modal on outside click
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('fixed') && e.target.classList.contains('inset-0')) {
+                closeComingSoonModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeComingSoonModal();
+            }
+        });
+    </script>
+</body>
+</html>
